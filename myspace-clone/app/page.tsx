@@ -1,36 +1,66 @@
 import header from "./components/header"
 import NavBar from "./components/NavBar";
+import ProfileSideBar from "./components/ProfileSideBar"
 import ProfileBox from "./components/Profilebox";
 import BlogEntry from "./components/BlogEntry";
 import AboutBox from "./components/AboutBox";
-import ProfileSideBar from "./components/ProfileSideBar";
+
+
+
 
 export default function Home() {
   return (
     <main>
-      <h1> Just checking</h1>
+
       <header />
-      <NavBar />
+      <Navbar />
 
-      <main className="container">
+        <main className="container">
 
-        <section className="section-left">
+          <section className="section-left">
 
-          <ProfileSideBar />
+          <h2>John</h2>
 
-        </section>
+          <p>[edit photo]</p>
 
-        <section className="section-right">
+          <img
+            src="/profile.png"
+            alt="profile"
+          />
 
-          <ProfileBox />
+          <p>Living!</p>
 
-          <BlogEntry />
+          <p>[edit]</p>
 
-          <AboutBox />
-        </section>
+          <h2>ONLINE!</h2>
+
+          <p>
+            <strong>Mood:</strong> Content [edit]
+          </p>
+
+          <p>
+            <strong>View my:</strong>
+
+            <a href="#blog"> Blog </a>
+
+            <a href="#pic"> Pics </a>
+
+            <a href="#video"> Videos </a>
+          </p>
+
+          </section>
+
+          <section className="section-right">
+
+            <ProfileBox />
+
+            <BlogEntry />
+
+            <AboutBox />
+          </section>
+
+        </main>
 
       </main>
-
-    </main>
   );
 }
