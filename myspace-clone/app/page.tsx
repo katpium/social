@@ -12,7 +12,7 @@ export default function Home() {
     <main>
 
       <header />
-      <Navbar />
+      <NavBar />
 
       <main className="container">
 
