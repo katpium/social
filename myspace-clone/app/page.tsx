@@ -1,3 +1,5 @@
+import Navbar from "./components/Navbar";
+
 export default function Home() {
   return (
     <main>
@@ -16,11 +18,7 @@ export default function Home() {
         </div>
       </header>
 
-      <nav className="nav-bar">
-        <a href="#home">Home</a>
-        <a href="#browse">Browse</a>
-        <a href="#search">Search</a>
-      </nav>
+      <Navbar />
 
       <main className="container">
 
