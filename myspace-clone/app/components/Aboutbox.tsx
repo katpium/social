@@ -1,8 +1,6 @@
-export default function Aboutbox() {
+export default function AboutBox() {
     return (
         <>
-        <h2>John's Latest Blog Entries [View Blog]</h2>
-
         <div className="about-box">
 
             <h2 className="box-title">

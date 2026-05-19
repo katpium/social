@@ -1,7 +1,9 @@
 import header from "./components/header"
-import Navbar from "./components/Navbar";
-import Profilebox from "./components/Profilebox";
-import Aboutbox from "./components/Aboutbox";
+import NavBar from "./components/NavBar";
+import ProfileBox from "./components/Profilebox";
+import BlogEntry from "./components/BlogEntry";
+import AboutBox from "./components/AboutBox";
+
 
 
 
@@ -49,9 +51,11 @@ export default function Home() {
 
         <section className="section-right">
 
-          <Profilebox />
+          <ProfileBox />
 
-          <Aboutbox />
+          <BlogEntry />
+
+          <AboutBox />
         </section>
 
       </main>
