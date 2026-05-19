@@ -3,49 +3,20 @@ import NavBar from "./components/NavBar";
 import ProfileBox from "./components/Profilebox";
 import BlogEntry from "./components/BlogEntry";
 import AboutBox from "./components/AboutBox";
-
-
-
+import ProfileSideBar from "./components/ProfileSideBar";
 
 export default function Home() {
   return (
     <main>
-
+      <h1> Just checking</h1>
       <header />
-      <Navbar />
+      <NavBar />
 
       <main className="container">
 
         <section className="section-left">
 
-          <h2>John</h2>
-
-          <p>[edit photo]</p>
-
-          <img
-            src="/profile.png"
-            alt="profile"
-          />
-
-          <p>Living!</p>
-
-          <p>[edit]</p>
-
-          <h2>ONLINE!</h2>
-
-          <p>
-            <strong>Mood:</strong> Content [edit]
-          </p>
-
-          <p>
-            <strong>View my:</strong>
-
-            <a href="#blog"> Blog </a>
-
-            <a href="#pic"> Pics </a>
-
-            <a href="#video"> Videos </a>
-          </p>
+          <ProfileSideBar />
 
         </section>
 

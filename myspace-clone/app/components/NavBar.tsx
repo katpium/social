@@ -1,4 +1,4 @@
-export default function Navbar() {
+export default function NavBar() {
     return (
         <nav className="nav-bar">
         <a href="#home">Home</a>

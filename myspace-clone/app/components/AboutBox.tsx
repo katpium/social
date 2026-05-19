@@ -24,7 +24,7 @@ export default function AboutBox() {
             <p>[edit]</p>
 
           </div>
-          </>
+        </>
 
     );
 }
