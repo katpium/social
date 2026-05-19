@@ -1,23 +1,15 @@
+import header from "./components/header"
 import Navbar from "./components/Navbar";
+import Profilebox from "./components/Profilebox";
+import Aboutbox from "./components/Aboutbox";
+
+
 
 export default function Home() {
   return (
     <main>
 
-      <header className="header">
-        <h1>MySpace Clone</h1>
-
-        <div className="search-bar">
-          <h2>Search Users:</h2>
-
-          <input type="text" />
-
-          <button className="search-button">
-            Search
-          </button>
-        </div>
-      </header>
-
+      <header />
       <Navbar />
 
       <main className="container">
@@ -57,38 +49,9 @@ export default function Home() {
 
         <section className="section-right">
 
-          <div className="profile-box">
-            <h2>Edit Your Profile</h2>
-          </div>
+          <Profilebox />
 
-          <h2>
-            John's Latest Blog Entries [View Blog]
-          </h2>
-
-          <div className="about-box">
-
-            <h2 className="box-title">
-              John's Blurbs
-            </h2>
-
-            <h2 className="section-title">
-              <strong>About me:</strong>
-            </h2>
-
-            <p>
-              I've been doing alot of morning exercise!
-            </p>
-
-            <p>[edit]</p>
-
-            <h2 className="section-title">
-              Who I'd like to meet:
-            </h2>
-
-            <p>[edit]</p>
-
-          </div>
-
+          <Aboutbox />
         </section>
 
       </main>
