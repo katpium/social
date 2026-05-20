@@ -1,5 +1,7 @@
+import Link from "next/link";
 import Header from "../components/header";
 import NavBar from "../components/NavBar";
+import WelcomeSidebar from "../components/WelcomeSidebar";
 import { loginAction } from "./actions";
 
 export default function LoginPage() {
@@ -9,22 +11,30 @@ export default function LoginPage() {
             <NavBar />
 
             <div className="container">
-                <section className="section-right">
-                    <div className="about-box">
-                        <h2 className="box-title">Member Login</h2>
+                <aside className="section-left">
+                    <WelcomeSidebar
+                        title="✨ Welcome Back ✨"
+                        subtitle="a space for friends"
+                        bullets={[
+                            "🌟 Customize your profile with stickers, music & themes",
+                            "💖 Add friends, send messages, write blog posts",
+                            "🦄 Be your most authentic 2006 self",
+                        ]}
+                    />
+                </aside>
 
-                        <form action={loginAction} className="login-form">
+                <section className="section-right">
+                    <div className="auth-card">
+                        <h2 className="auth-card-title">★ Member Login ★</h2>
+
+                        <form action={loginAction} className="auth-form">
                             <label>
-                                Username:
-                                <input
-                                    name="username"
-                                    type="text"
-                                    required
-                                />
+                                Username
+                                <input name="username" type="text" required />
                             </label>
 
                             <label>
-                                Password:
+                                Password
                                 <input
                                     name="password"
                                     type="password"
@@ -32,15 +42,23 @@ export default function LoginPage() {
                                 />
                             </label>
 
-                            <button type="submit" className="login-button">
-                                Login
+                            <button type="submit" className="auth-submit">
+                                Log In
                             </button>
                         </form>
 
-                        <p style={{ margin: "12px 8px", fontSize: "11px", color: "#666" }}>
-                            Try: <strong>john</strong> / <strong>hiking123</strong>,{" "}
-                            <strong>levi</strong> / <strong>homebody</strong>,{" "}
+                        <hr className="auth-divider" />
+
+                        <p className="auth-hint">
+                            Try: <strong>john</strong> / <strong>hiking123</strong>
+                            {" · "}
+                            <strong>levi</strong> / <strong>homebody</strong>
+                            {" · "}
                             <strong>ben</strong> / <strong>yeehaw</strong>
+                        </p>
+                        <p className="auth-hint">
+                            Don&apos;t have an account?{" "}
+                            <Link href="/signup">Sign up here</Link>.
                         </p>
                     </div>
                 </section>

@@ -36,7 +36,14 @@ export default async function Header() {
                         </button>
                     </form>
                 ) : (
-                    <Link href="/login">Login</Link>
+                    <>
+                        <Link href="/login" className="header-sign-in">
+                            Log In
+                        </Link>
+                        <Link href="/signup" className="header-sign-up">
+                            Sign Up
+                        </Link>
+                    </>
                 )}
             </div>
         </header>

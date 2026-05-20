@@ -10,6 +10,8 @@ type Props = {
     initialBgColor: string;
     initialBgPattern: string;
     initialAccentColor: string;
+    initialAccentShadeColor: string;
+    initialAccentTextColor: string;
     initialCardColor: string;
     initialTextColor: string;
     initialMusicTitle: string;

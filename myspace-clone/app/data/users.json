@@ -4,7 +4,7 @@
     "password": "hiking123",
     "name": "John",
     "status": "Bello",
-    "bio": "27 year old, software engineer in Boulder, Colorado.",
+    "bio": "20 year old, software engineer in Boulder, Colorado.",
     "mood": "content heh",
     "about": "I've been doing a lot of morning exercise!",
     "answer": "",
@@ -17,24 +17,28 @@
       "heroes": "My grandpa."
     },
     "friends": [
-      "levi",
+      "ben",
+      "levi"
+    ],
+    "favorites": [
       "ben"
     ],
-    "favorites": [],
     "photoUrl": "/uploads/john-1779259169731.jpg",
     "theme": {
       "bgColor": "#f297e1",
       "accentColor": "#e273af",
-      "bgPattern": "hearts",
+      "bgPattern": "stripes",
       "cardColor": "#fde7f9",
-      "textColor": "#ff0a99"
+      "textColor": "#ff0a99",
+      "accentShadeColor": "#d8ad79",
+      "accentTextColor": "#e00000"
     },
     "stickers": [
       {
         "id": "legacy-1-128150",
         "emoji": "💖",
-        "x": 167,
-        "y": 11,
+        "x": 95,
+        "y": 13,
         "size": 40
       },
       {
@@ -45,20 +49,52 @@
         "size": 25
       },
       {
-        "id": "legacy-3-128191",
-        "emoji": "💿",
-        "x": 254,
-        "y": 35,
+        "id": "legacy-4-129412",
+        "emoji": "🦄",
+        "x": 698,
+        "y": 390,
         "size": 40
       },
       {
-        "id": "legacy-4-129412",
-        "emoji": "🦄",
-        "x": 313,
-        "y": 121,
-        "size": 40
+        "id": "s-mpdr41jl-4m87a0",
+        "emoji": "",
+        "x": 159,
+        "y": 140,
+        "size": 91,
+        "imageUrl": "/uploads/john-sticker-1779262767674.png",
+        "rotation": 319,
+        "wiggle": true
+      },
+      {
+        "id": "s-mpdr567c-8p2n9o",
+        "emoji": "",
+        "x": 55,
+        "y": 653,
+        "size": 115,
+        "imageUrl": "/uploads/john-sticker-1779262820338.png"
+      },
+      {
+        "id": "s-mpdr5ior-457wim",
+        "emoji": "",
+        "x": 180,
+        "y": 671,
+        "size": 125,
+        "imageUrl": "/uploads/john-sticker-1779262836517.png"
+      },
+      {
+        "id": "s-mpdr5x89-lmba39",
+        "emoji": "Check us",
+        "x": 231,
+        "y": 664,
+        "size": 25,
+        "wiggle": true
       }
-    ]
+    ],
+    "music": {
+      "url": "/uploads/john-music-1779263014558.mp3",
+      "title": "Avril Lavigne - Sk8er Boi (Official Video)"
+    },
+    "blocked": []
   },
   {
     "username": "levi",
@@ -78,29 +114,44 @@
       "heroes": "Nobody really."
     },
     "friends": [
-      "john",
-      "ben"
+      "ben",
+      "john"
     ],
-    "photoUrl": "/uploads/levi-1779255141126.png",
+    "photoUrl": "/uploads/levi-1779266736707.jpg",
     "theme": {
-      "bgColor": "#0a183d",
-      "accentColor": "#000000",
-      "bgPattern": "checker"
+      "bgColor": "#190000",
+      "accentColor": "#615151",
+      "bgPattern": "checker",
+      "cardColor": "#f5f5f5",
+      "textColor": "#c20000",
+      "accentShadeColor": "#121212",
+      "accentTextColor": "#d23737"
     },
     "stickers": [
       {
-        "id": "s-mpdqc3k4-pk9jl6",
-        "emoji": "🌟",
-        "x": 310,
-        "y": 161,
-        "size": 57
+        "id": "s-mpdqumo7-8g2bsy",
+        "emoji": "🎸",
+        "x": 136,
+        "y": 182,
+        "size": 48,
+        "rotation": 0,
+        "opacity": 1,
+        "wiggle": true
       },
       {
-        "id": "s-mpdqdbtm-7rw1bj",
-        "emoji": "🦋",
-        "x": 350,
-        "y": 15,
-        "size": 48
+        "id": "s-mpdrbl15-w09t1b",
+        "emoji": "👾",
+        "x": 80,
+        "y": 10,
+        "size": 31
+      },
+      {
+        "id": "s-mpdrbmq9-5zk2e1",
+        "emoji": "🎮",
+        "x": 306,
+        "y": 49,
+        "size": 37,
+        "wiggle": true
       }
     ],
     "music": {
@@ -112,7 +163,7 @@
     "username": "ben",
     "password": "yeehaw",
     "name": "Ben",
-    "status": "over",
+    "status": "dover",
     "bio": "41 year old, cattle rancher in Amarillo, Texas.",
     "mood": "excited",
     "about": "Howdy partner!",
@@ -127,7 +178,30 @@
     },
     "friends": [
       "levi",
-      "john"
+      "john",
+      "lam"
     ]
+  },
+  {
+    "username": "lam",
+    "password": "123456789",
+    "name": "katpium",
+    "status": "Just joined spacehey!",
+    "bio": "",
+    "mood": "new here",
+    "about": "",
+    "answer": "",
+    "interests": {
+      "general": "",
+      "music": "",
+      "movies": "",
+      "television": "",
+      "books": "",
+      "heroes": ""
+    },
+    "friends": [
+      "ben"
+    ],
+    "favorites": []
   }
 ]

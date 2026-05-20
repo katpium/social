@@ -1,10 +1,14 @@
 import { auth } from "@/auth";
 import { getUserByUsername } from "../data/users";
+import { hasPendingRequest } from "../data/inbox";
 import {
     toggleFriend,
     toggleFavorite,
     toggleBlock,
 } from "../actions/social";
+import { sendFriendRequest } from "../actions/inbox";
+import SendMessage from "./SendMessage";
+import InstantMessageButton from "./InstantMessageButton";
 
 type Props = {
     viewedUsername: string;
@@ -18,9 +22,12 @@ export default async function ContactBox({ viewedUsername, viewedName }: Props) 
     const isLoggedIn = !!me;
 
     const meUser = me ? getUserByUsername(me) : null;
+    const targetUser = getUserByUsername(viewedUsername);
     const isFriend = !!meUser?.friends.includes(viewedUsername);
     const isFavorite = !!meUser?.favorites?.includes(viewedUsername);
     const isBlocked = !!meUser?.blocked?.includes(viewedUsername);
+    const pendingOutgoing =
+        !!me && !isFriend && hasPendingRequest(me, viewedUsername);
 
     const canAct = isLoggedIn && !isSelf;
 
@@ -38,13 +45,25 @@ export default async function ContactBox({ viewedUsername, viewedName }: Props) 
             )}
 
             <ul className="contact-list">
-                <ActionItem
-                    enabled={canAct}
-                    action={toggleFriend.bind(null, viewedUsername)}
-                    icon="⊕"
-                    label={isFriend ? "Remove Friend" : "Add to Friends"}
-                    active={isFriend}
-                />
+                {isFriend ? (
+                    <ActionItem
+                        enabled={canAct}
+                        action={toggleFriend.bind(null, viewedUsername)}
+                        icon="⊕"
+                        label="Remove Friend"
+                        active={true}
+                    />
+                ) : pendingOutgoing ? (
+                    <StubItem icon="⊕" label="Request Pending" />
+                ) : (
+                    <ActionItem
+                        enabled={canAct}
+                        action={sendFriendRequest.bind(null, viewedUsername)}
+                        icon="⊕"
+                        label="Add to Friends"
+                        active={false}
+                    />
+                )}
                 <ActionItem
                     enabled={canAct}
                     action={toggleFavorite.bind(null, viewedUsername)}
@@ -52,9 +71,16 @@ export default async function ContactBox({ viewedUsername, viewedName }: Props) 
                     label={isFavorite ? "Remove Favorite" : "Add to Favorites"}
                     active={isFavorite}
                 />
-                <StubItem icon="✉" label="Send Message" />
+                <SendMessage targetUsername={viewedUsername} enabled={canAct} />
                 <StubItem icon="➤" label="Forward to Friend" />
-                <StubItem icon="💬" label="Instant Message" />
+                <InstantMessageButton
+                    me={me ?? ""}
+                    meName={meUser?.name ?? me ?? ""}
+                    target={viewedUsername}
+                    targetName={viewedName}
+                    targetPhoto={targetUser?.photoUrl}
+                    enabled={canAct}
+                />
                 <ActionItem
                     enabled={canAct}
                     action={toggleBlock.bind(null, viewedUsername)}

@@ -12,6 +12,8 @@ type CustomizationPatch = {
         bgColor?: string;
         bgPattern?: string;
         accentColor?: string;
+        accentShadeColor?: string;
+        accentTextColor?: string;
         cardColor?: string;
         textColor?: string;
     };
@@ -40,6 +42,18 @@ export async function updateUserCustomization(
             }
             if (typeof patch.theme.accentColor === "string" && HEX.test(patch.theme.accentColor)) {
                 t.accentColor = patch.theme.accentColor;
+            }
+            if (
+                typeof patch.theme.accentShadeColor === "string" &&
+                HEX.test(patch.theme.accentShadeColor)
+            ) {
+                t.accentShadeColor = patch.theme.accentShadeColor;
+            }
+            if (
+                typeof patch.theme.accentTextColor === "string" &&
+                HEX.test(patch.theme.accentTextColor)
+            ) {
+                t.accentTextColor = patch.theme.accentTextColor;
             }
             if (typeof patch.theme.cardColor === "string" && HEX.test(patch.theme.cardColor)) {
                 t.cardColor = patch.theme.cardColor;

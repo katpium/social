@@ -1,0 +1,31 @@
+[
+  {
+    "id": "p-mpdrl4j6-vd19ik",
+    "authorUsername": "john",
+    "title": "...",
+    "body": "He was a boy\r\nShe was a girl\r\nCan I make it any more obvious?\r\nHe was a punk\r\nShe did ballet\r\nWhat more can I say?",
+    "createdAt": "2026-05-20T07:52:44.082Z",
+    "likes": [
+      "john"
+    ],
+    "comments": []
+  },
+  {
+    "id": "p-mpdr1bw3-ytpr3j",
+    "authorUsername": "levi",
+    "title": "YAAYAYA",
+    "body": "ayayay",
+    "createdAt": "2026-05-20T07:37:20.499Z",
+    "likes": [
+      "john"
+    ],
+    "comments": [
+      {
+        "id": "c-mpdr2mlx-scjfdr",
+        "authorUsername": "john",
+        "body": "what are you even talking about",
+        "createdAt": "2026-05-20T07:38:21.045Z"
+      }
+    ]
+  }
+]

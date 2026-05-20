@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { updateUserCustomization } from "@/app/actions/customize";
 import { setUserStickers } from "@/app/actions/stickers";
 import { uploadMusic } from "@/app/actions/upload-music";
+import { uploadSticker } from "@/app/actions/upload-sticker";
 import { DEFAULT_THEME } from "@/app/data/theme-defaults";
 import type { StickerPlacement } from "@/app/data/sticker";
 
@@ -29,6 +30,8 @@ type Props = {
     initialBgColor: string;
     initialBgPattern: string;
     initialAccentColor: string;
+    initialAccentShadeColor: string;
+    initialAccentTextColor: string;
     initialCardColor: string;
     initialTextColor: string;
     initialMusicTitle: string;
@@ -42,6 +45,8 @@ export default function Customizer({
     initialBgColor,
     initialBgPattern,
     initialAccentColor,
+    initialAccentShadeColor,
+    initialAccentTextColor,
     initialCardColor,
     initialTextColor,
     initialMusicTitle,
@@ -51,6 +56,8 @@ export default function Customizer({
     const [bgColor, setBgColor] = useState(initialBgColor);
     const [bgPattern, setBgPattern] = useState(initialBgPattern);
     const [accentColor, setAccentColor] = useState(initialAccentColor);
+    const [accentShadeColor, setAccentShadeColor] = useState(initialAccentShadeColor);
+    const [accentTextColor, setAccentTextColor] = useState(initialAccentTextColor);
     const [cardColor, setCardColor] = useState(initialCardColor);
     const [textColor, setTextColor] = useState(initialTextColor);
     const [musicTitle, setMusicTitle] = useState(initialMusicTitle);
@@ -63,12 +70,20 @@ export default function Customizer({
     const [isUploading, startUpload] = useTransition();
     const [isStickerWorking, startStickerWork] = useTransition();
     const musicFileInputRef = useRef<HTMLInputElement>(null);
+    const stickerImageInputRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
+
+    function nextPlacement(): { x: number; y: number } {
+        const i = currentStickers.length;
+        return { x: 200 + (i % 5) * 40, y: 60 + Math.floor(i / 5) * 40 };
+    }
 
     const themeIsDefault =
         bgColor === DEFAULT_THEME.bgColor &&
         bgPattern === DEFAULT_THEME.bgPattern &&
         accentColor === DEFAULT_THEME.accentColor &&
+        accentShadeColor === DEFAULT_THEME.accentShadeColor &&
+        accentTextColor === DEFAULT_THEME.accentTextColor &&
         cardColor === DEFAULT_THEME.cardColor &&
         textColor === DEFAULT_THEME.textColor;
 
@@ -76,19 +91,25 @@ export default function Customizer({
         setBgColor(DEFAULT_THEME.bgColor);
         setBgPattern(DEFAULT_THEME.bgPattern);
         setAccentColor(DEFAULT_THEME.accentColor);
+        setAccentShadeColor(DEFAULT_THEME.accentShadeColor);
+        setAccentTextColor(DEFAULT_THEME.accentTextColor);
         setCardColor(DEFAULT_THEME.cardColor);
         setTextColor(DEFAULT_THEME.textColor);
         setMsg("Theme reset — click Save to apply.");
     }
 
+    function matchShadeToAccent() {
+        setAccentShadeColor(accentColor);
+    }
+
     function addSticker(emoji: string) {
         startStickerWork(async () => {
-            const i = currentStickers.length;
+            const pos = nextPlacement();
             const newPlacement: StickerPlacement = {
                 id: `s-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`,
                 emoji,
-                x: 200 + (i % 5) * 40,
-                y: 60 + Math.floor(i / 5) * 40,
+                x: pos.x,
+                y: pos.y,
                 size: 48,
             };
             const result = await setUserStickers(username, [...currentStickers, newPlacement]);
@@ -98,6 +119,35 @@ export default function Customizer({
             } else {
                 setStickerMsg(result.error ?? "Failed to add sticker.");
             }
+        });
+    }
+
+    function handleStickerImage(e: ChangeEvent<HTMLInputElement>) {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        const formData = new FormData();
+        formData.append("sticker", file);
+        startStickerWork(async () => {
+            setStickerMsg(null);
+            const upload = await uploadSticker(username, formData);
+            if (!upload.ok || !upload.url) {
+                setStickerMsg(upload.error ?? "Upload failed.");
+                if (stickerImageInputRef.current) stickerImageInputRef.current.value = "";
+                return;
+            }
+            const pos = nextPlacement();
+            const newPlacement: StickerPlacement = {
+                id: `s-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`,
+                emoji: "",
+                imageUrl: upload.url,
+                x: pos.x,
+                y: pos.y,
+                size: 120,
+            };
+            const result = await setUserStickers(username, [...currentStickers, newPlacement]);
+            if (result.ok) router.refresh();
+            else setStickerMsg(result.error ?? "Failed to add sticker.");
+            if (stickerImageInputRef.current) stickerImageInputRef.current.value = "";
         });
     }
 
@@ -139,7 +189,15 @@ export default function Customizer({
         startTransition(async () => {
             const trimmedUrl = musicUrl.trim();
             const result = await updateUserCustomization(username, {
-                theme: { bgColor, bgPattern, accentColor, cardColor, textColor },
+                theme: {
+                    bgColor,
+                    bgPattern,
+                    accentColor,
+                    accentShadeColor,
+                    accentTextColor,
+                    cardColor,
+                    textColor,
+                },
                 music: trimmedUrl
                     ? { url: trimmedUrl, title: musicTitle.trim() }
                     : null,
@@ -222,7 +280,7 @@ export default function Customizer({
             <fieldset>
                 <legend>Accent (box headers)</legend>
                 <label>
-                    Color
+                    Top color
                     <input
                         type="color"
                         value={accentColor}
@@ -230,6 +288,37 @@ export default function Customizer({
                     />
                     <code>{accentColor}</code>
                 </label>
+                <label>
+                    Bottom shade
+                    <input
+                        type="color"
+                        value={accentShadeColor}
+                        onChange={(e) => setAccentShadeColor(e.target.value)}
+                    />
+                    <code>{accentShadeColor}</code>
+                    <button
+                        type="button"
+                        className="cancel-button customizer-inline-btn"
+                        onClick={matchShadeToAccent}
+                        disabled={accentShadeColor === accentColor}
+                        title="Make the header a single flat color"
+                    >
+                        Flat
+                    </button>
+                </label>
+                <label>
+                    Header text
+                    <input
+                        type="color"
+                        value={accentTextColor}
+                        onChange={(e) => setAccentTextColor(e.target.value)}
+                    />
+                    <code>{accentTextColor}</code>
+                </label>
+                <p className="customizer-hint">
+                    Top and bottom shade make the gradient. Pick the same color for a flat header,
+                    or click <strong>Flat</strong> to copy the top color down.
+                </p>
             </fieldset>
 
             <div className="customizer-theme-actions">
@@ -306,7 +395,7 @@ export default function Customizer({
                     ))}
                 </div>
                 <label className="customizer-custom-sticker">
-                    Add your own
+                    Custom text/emoji
                     <input
                         type="text"
                         maxLength={8}
@@ -327,6 +416,16 @@ export default function Customizer({
                     >
                         Add
                     </button>
+                </label>
+                <label className="customizer-custom-sticker">
+                    Upload image
+                    <input
+                        ref={stickerImageInputRef}
+                        type="file"
+                        accept="image/jpeg,image/png,image/gif,image/webp"
+                        onChange={handleStickerImage}
+                        disabled={isStickerWorking}
+                    />
                 </label>
                 <p className="customizer-hint customizer-sticker-summary">
                     On your profile: <strong>{currentStickers.length}</strong> sticker

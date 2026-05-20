@@ -29,7 +29,7 @@ type Drag = {
 };
 
 const MIN_SIZE = 16;
-const MAX_SIZE = 240;
+const MAX_SIZE = 400;
 const DRAG_THRESHOLD = 3;
 
 export default function StickerLayer({ username, initialStickers, canEdit }: Props) {
@@ -66,12 +66,12 @@ export default function StickerLayer({ username, initialStickers, canEdit }: Pro
     }
 
     function updateSticker(id: string, patch: Partial<StickerPlacement>, persistNow = false) {
-        setStickers((prev) => {
-            const next = prev.map((s) => (s.id === id ? { ...s, ...patch } : s));
-            stickersRef.current = next;
-            if (persistNow) persist(next);
-            return next;
-        });
+        const next = stickersRef.current.map((s) =>
+            s.id === id ? { ...s, ...patch } : s
+        );
+        stickersRef.current = next;
+        setStickers(next);
+        if (persistNow) persist(next);
     }
 
     function handlePointerDown(
@@ -160,19 +160,40 @@ export default function StickerLayer({ username, initialStickers, canEdit }: Pro
                                 opacity,
                             }}
                         >
-                            <span
-                                className={"sticker-emoji" + (wiggle ? " wiggle" : "")}
-                                style={{ fontSize: sticker.size }}
-                                onPointerDown={
-                                    canEdit
-                                        ? (e) => handlePointerDown(e, sticker, "move")
-                                        : undefined
-                                }
-                                onPointerMove={canEdit ? handlePointerMove : undefined}
-                                onPointerUp={canEdit ? handlePointerUp : undefined}
-                            >
-                                {sticker.emoji}
-                            </span>
+                            {sticker.imageUrl ? (
+                                <img
+                                    src={sticker.imageUrl}
+                                    alt=""
+                                    draggable={false}
+                                    className={
+                                        "sticker-image" + (wiggle ? " wiggle" : "")
+                                    }
+                                    style={{ width: sticker.size, height: "auto" }}
+                                    onPointerDown={
+                                        canEdit
+                                            ? (e) => handlePointerDown(e, sticker, "move")
+                                            : undefined
+                                    }
+                                    onPointerMove={canEdit ? handlePointerMove : undefined}
+                                    onPointerUp={canEdit ? handlePointerUp : undefined}
+                                />
+                            ) : (
+                                <span
+                                    className={
+                                        "sticker-emoji" + (wiggle ? " wiggle" : "")
+                                    }
+                                    style={{ fontSize: sticker.size }}
+                                    onPointerDown={
+                                        canEdit
+                                            ? (e) => handlePointerDown(e, sticker, "move")
+                                            : undefined
+                                    }
+                                    onPointerMove={canEdit ? handlePointerMove : undefined}
+                                    onPointerUp={canEdit ? handlePointerUp : undefined}
+                                >
+                                    {sticker.emoji}
+                                </span>
+                            )}
                         </div>
                         {canEdit && (
                             <>

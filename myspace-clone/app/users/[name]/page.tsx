@@ -40,6 +40,8 @@ export default async function UserPage({ params }: Props) {
     const mainStyle: CSSProperties & Record<string, string> = {};
     if (theme.bgColor) mainStyle.backgroundColor = theme.bgColor;
     if (theme.accentColor) mainStyle["--accent"] = theme.accentColor;
+    if (theme.accentShadeColor) mainStyle["--accent-shade"] = theme.accentShadeColor;
+    if (theme.accentTextColor) mainStyle["--accent-text"] = theme.accentTextColor;
     if (theme.cardColor) mainStyle["--card-bg"] = theme.cardColor;
     if (theme.textColor) mainStyle["--text-color"] = theme.textColor;
 
@@ -81,6 +83,8 @@ export default async function UserPage({ params }: Props) {
                             initialBgColor={theme.bgColor ?? DEFAULT_THEME.bgColor}
                             initialBgPattern={theme.bgPattern ?? DEFAULT_THEME.bgPattern}
                             initialAccentColor={theme.accentColor ?? DEFAULT_THEME.accentColor}
+                            initialAccentShadeColor={theme.accentShadeColor ?? DEFAULT_THEME.accentShadeColor}
+                            initialAccentTextColor={theme.accentTextColor ?? DEFAULT_THEME.accentTextColor}
                             initialCardColor={theme.cardColor ?? DEFAULT_THEME.cardColor}
                             initialTextColor={theme.textColor ?? DEFAULT_THEME.textColor}
                             initialMusicTitle={user.music?.title ?? ""}

@@ -1,6 +1,7 @@
 export type StickerPlacement = {
     id: string;
     emoji: string;
+    imageUrl?: string;
     x: number;
     y: number;
     size: number;

@@ -8,7 +8,7 @@ import { revalidatePath } from "next/cache";
 const EMOJI_MAX_LEN = 8;
 const ID_MAX_LEN = 48;
 const MIN_SIZE = 16;
-const MAX_SIZE = 240;
+const MAX_SIZE = 400;
 const COORD_MIN = -500;
 const COORD_MAX = 3000;
 const MAX_STICKERS = 50;
@@ -33,28 +33,44 @@ export async function setUserStickers(
         if (!user) return { ok: false, error: "User not found." };
 
         user.stickers = stickers
-            .filter(
-                (s) =>
-                    s &&
-                    typeof s.id === "string" &&
-                    s.id.length > 0 &&
-                    s.id.length <= ID_MAX_LEN &&
+            .filter((s) => {
+                if (
+                    !s ||
+                    typeof s.id !== "string" ||
+                    s.id.length === 0 ||
+                    s.id.length > ID_MAX_LEN ||
+                    !Number.isFinite(s.x) ||
+                    !Number.isFinite(s.y) ||
+                    !Number.isFinite(s.size)
+                ) {
+                    return false;
+                }
+                const hasEmoji =
                     typeof s.emoji === "string" &&
                     s.emoji.length > 0 &&
-                    s.emoji.length <= EMOJI_MAX_LEN &&
-                    Number.isFinite(s.x) &&
-                    Number.isFinite(s.y) &&
-                    Number.isFinite(s.size)
-            )
+                    s.emoji.length <= EMOJI_MAX_LEN;
+                const hasImage =
+                    typeof s.imageUrl === "string" &&
+                    s.imageUrl.length > 0 &&
+                    s.imageUrl.length <= 300 &&
+                    /^\/uploads\//.test(s.imageUrl);
+                return hasEmoji || hasImage;
+            })
             .slice(0, MAX_STICKERS)
             .map((s) => {
                 const base: StickerPlacement = {
                     id: s.id,
-                    emoji: s.emoji,
+                    emoji:
+                        typeof s.emoji === "string" && s.emoji.length > 0
+                            ? s.emoji.slice(0, EMOJI_MAX_LEN)
+                            : "",
                     x: clamp(Math.round(s.x), COORD_MIN, COORD_MAX),
                     y: clamp(Math.round(s.y), COORD_MIN, COORD_MAX),
                     size: clamp(Math.round(s.size), MIN_SIZE, MAX_SIZE),
                 };
+                if (typeof s.imageUrl === "string" && /^\/uploads\//.test(s.imageUrl)) {
+                    base.imageUrl = s.imageUrl.slice(0, 300);
+                }
                 if (typeof s.rotation === "number" && Number.isFinite(s.rotation)) {
                     base.rotation = ((Math.round(s.rotation) % 360) + 360) % 360;
                 }

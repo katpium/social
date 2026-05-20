@@ -28,6 +28,8 @@ export type User = {
         bgColor?: string;
         bgPattern?: string;
         accentColor?: string;
+        accentShadeColor?: string;
+        accentTextColor?: string;
         cardColor?: string;
         textColor?: string;
     };

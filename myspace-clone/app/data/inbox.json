@@ -1,0 +1,36 @@
+[
+  {
+    "id": "fr-mpds3yez-9fpnkl",
+    "type": "friend_request",
+    "from": "john",
+    "to": "levi",
+    "status": "approved",
+    "createdAt": "2026-05-20T08:07:22.619Z"
+  },
+  {
+    "id": "m-mpds4puw-oat0wr",
+    "type": "message",
+    "from": "levi",
+    "to": "john",
+    "body": "hey",
+    "read": false,
+    "createdAt": "2026-05-20T08:07:58.184Z"
+  },
+  {
+    "id": "fr-mpdspj0x-sj1oik",
+    "type": "friend_request",
+    "from": "lam",
+    "to": "ben",
+    "status": "approved",
+    "createdAt": "2026-05-20T08:24:09.105Z"
+  },
+  {
+    "id": "m-mpdt7cx0-lvhtfu",
+    "type": "message",
+    "from": "john",
+    "to": "ben",
+    "body": "hello",
+    "read": false,
+    "createdAt": "2026-05-20T08:38:00.996Z"
+  }
+]
