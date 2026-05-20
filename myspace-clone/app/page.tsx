@@ -6,16 +6,48 @@ import BlogEntry from "./components/BlogEntry";
 import AboutBox from "./components/AboutBox";
 
 export default function Home() {
-  return (
+  
+  const users = [
+    {
+      name: "John",
+      status: "Living!",
+      mood: "content",
+      about: "I like to hike",
+      answer: "",
+    },
+
+    {
+      name: "Levi",
+      status: "Alright",
+      mood: "neutral",
+      about: "I like to stay home",
+      answer: "no one.",
+    },
+
+    {
+      name: "Ben",
+      status: "over",
+      mood: "excited",
+      about: "Howdy partner!",
+      answer: "Sofia Veragara",
+    },
+  ];
+
+  return ( //use for UI (JSX, HTML-stuff)
     <main>
 
       <header />
       <NavBar />
 
-        <main className="container">
+        {users.map((user) => (
+        <div className="container" key = "user.name">
 
           <section className="section-left">
-            <ProfileSideBar />
+            <ProfileSideBar
+            name = {user.name}
+            status = {user.status}
+            mood = {user.mood}  
+          />
 
           </section>
 
@@ -25,10 +57,13 @@ export default function Home() {
 
             <BlogEntry />
 
-            <AboutBox />
+            <AboutBox 
+            about = {user.about}
+            answer = {user.answer}
+          />
           </section>
-
-        </main>
+          </div>
+        ))}
 
       </main>
   );

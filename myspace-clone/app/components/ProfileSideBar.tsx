@@ -1,7 +1,13 @@
-export default function ProfileSideBar (){
+type ProfileSideBarProps = {
+  name : string;
+  status: string;
+  mood: string;
+}
+
+export default function ProfileSideBar (props: ProfileSideBarProps){
     return (
         <>
-        <h2>John</h2>
+        <h2>{props.name}</h2>
 
           <p>[edit photo]</p>
 
@@ -10,14 +16,14 @@ export default function ProfileSideBar (){
             alt="profile"
           />
 
-          <p>Living!</p>
+          <p>{props.status}</p>
 
           <p>[edit]</p>
 
           <h2>ONLINE!</h2>
 
           <p>
-            <strong>Mood:</strong> Content [edit]
+            <strong>Mood:</strong> {props.mood} [edit]
           </p>
 
           <p>

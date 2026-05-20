@@ -1,4 +1,9 @@
-export default function AboutBox() {
+type AboutBoxProps = {
+    about: string;
+    answer: string;
+}
+
+export default function AboutBox(props: AboutBoxProps) {
     return (
         <>
         <div className="about-box">
@@ -12,7 +17,7 @@ export default function AboutBox() {
             </h2>
 
             <p>
-              I've been doing alot of morning exercise!
+              {props.about}
             </p>
 
             <p>[edit]</p>
@@ -20,6 +25,8 @@ export default function AboutBox() {
             <h2 className="section-title">
               Who I'd like to meet:
             </h2>
+
+            <p>{props.answer}</p>
 
             <p>[edit]</p>
 
