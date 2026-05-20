@@ -4,6 +4,13 @@ const nextConfig: NextConfig = {
   experimental: {
     serverActions: {
       bodySizeLimit: "25mb",
+      allowedOrigins: [
+        "*.trycloudflare.com",
+        "*.ngrok-free.app",
+        "*.ngrok.app",
+        "*.ngrok.io",
+        "*.loca.lt",
+      ],
     },
   },
 };
