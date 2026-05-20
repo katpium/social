@@ -1,0 +1,133 @@
+[
+  {
+    "username": "john",
+    "password": "hiking123",
+    "name": "John",
+    "status": "Bello",
+    "bio": "27 year old, software engineer in Boulder, Colorado.",
+    "mood": "content heh",
+    "about": "I've been doing a lot of morning exercise!",
+    "answer": "",
+    "interests": {
+      "general": "Hiking, photography, coffee shops, road trips",
+      "music": "The Strokes, Arctic Monkeys, Tame Impala",
+      "movies": "Lord of the Rings, Interstellar, The Big Lebowski",
+      "television": "The Office, Breaking Bad, Planet Earth",
+      "books": "1984, Sapiens, Into the Wild",
+      "heroes": "My grandpa."
+    },
+    "friends": [
+      "levi",
+      "ben"
+    ],
+    "favorites": [],
+    "photoUrl": "/uploads/john-1779259169731.jpg",
+    "theme": {
+      "bgColor": "#f297e1",
+      "accentColor": "#e273af",
+      "bgPattern": "hearts",
+      "cardColor": "#fde7f9",
+      "textColor": "#ff0a99"
+    },
+    "stickers": [
+      {
+        "id": "legacy-1-128150",
+        "emoji": "💖",
+        "x": 167,
+        "y": 11,
+        "size": 40
+      },
+      {
+        "id": "legacy-2-10024",
+        "emoji": "✨",
+        "x": 464,
+        "y": 185,
+        "size": 25
+      },
+      {
+        "id": "legacy-3-128191",
+        "emoji": "💿",
+        "x": 254,
+        "y": 35,
+        "size": 40
+      },
+      {
+        "id": "legacy-4-129412",
+        "emoji": "🦄",
+        "x": 313,
+        "y": 121,
+        "size": 40
+      }
+    ]
+  },
+  {
+    "username": "levi",
+    "password": "homebody",
+    "name": "Levi",
+    "status": "Alright",
+    "bio": "32 year old, indoor enthusiast in Portland, Oregon.",
+    "mood": "neutral",
+    "about": "I like to stay home",
+    "answer": "no one.",
+    "interests": {
+      "general": "Reading, video games, staying inside",
+      "music": "Radiohead, Bon Iver, Sufjan Stevens",
+      "movies": "Eternal Sunshine, Donnie Darko",
+      "television": "Twin Peaks, BoJack Horseman",
+      "books": "Slaughterhouse-Five, Catch-22",
+      "heroes": "Nobody really."
+    },
+    "friends": [
+      "john",
+      "ben"
+    ],
+    "photoUrl": "/uploads/levi-1779255141126.png",
+    "theme": {
+      "bgColor": "#0a183d",
+      "accentColor": "#000000",
+      "bgPattern": "checker"
+    },
+    "stickers": [
+      {
+        "id": "s-mpdqc3k4-pk9jl6",
+        "emoji": "🌟",
+        "x": 310,
+        "y": 161,
+        "size": 57
+      },
+      {
+        "id": "s-mpdqdbtm-7rw1bj",
+        "emoji": "🦋",
+        "x": 350,
+        "y": 15,
+        "size": 48
+      }
+    ],
+    "music": {
+      "url": "/uploads/levi-music-1779260740058.mp3",
+      "title": "Green Day - Brain StewJaded [Official Music Video]"
+    }
+  },
+  {
+    "username": "ben",
+    "password": "yeehaw",
+    "name": "Ben",
+    "status": "over",
+    "bio": "41 year old, cattle rancher in Amarillo, Texas.",
+    "mood": "excited",
+    "about": "Howdy partner!",
+    "answer": "Sofia Veragara",
+    "interests": {
+      "general": "BBQ, country music, rodeos, my truck",
+      "music": "George Strait, Willie Nelson, Dolly Parton",
+      "movies": "Tombstone, True Grit, No Country for Old Men",
+      "television": "Yellowstone, 1883",
+      "books": "Lonesome Dove",
+      "heroes": "John Wayne"
+    },
+    "friends": [
+      "levi",
+      "john"
+    ]
+  }
+]

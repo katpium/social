@@ -1,70 +1,31 @@
-import header from "./components/header"
+import Link from "next/link";
+import Header from "./components/header";
 import NavBar from "./components/NavBar";
-import ProfileSideBar from "./components/ProfileSideBar"
-import ProfileBox from "./components/Profilebox";
-import BlogEntry from "./components/BlogEntry";
-import AboutBox from "./components/AboutBox";
+import { getUsers } from "./data/users";
 
 export default function Home() {
-  
-  const users = [
-    {
-      name: "John",
-      status: "Living!",
-      mood: "content",
-      about: "I like to hike",
-      answer: "",
-    },
-
-    {
-      name: "Levi",
-      status: "Alright",
-      mood: "neutral",
-      about: "I like to stay home",
-      answer: "no one.",
-    },
-
-    {
-      name: "Ben",
-      status: "over",
-      mood: "excited",
-      about: "Howdy partner!",
-      answer: "Sofia Veragara",
-    },
-  ];
-
-  return ( //use for UI (JSX, HTML-stuff)
+  const users = getUsers();
+  return (
     <main>
-
-      <header />
+      <Header />
       <NavBar />
 
-        {users.map((user) => (
-        <div className="container" key = "user.name">
-
-          <section className="section-left">
-            <ProfileSideBar
-            name = {user.name}
-            status = {user.status}
-            mood = {user.mood}  
-          />
-
-          </section>
-
-          <section className="section-right">
-
-            <ProfileBox />
-
-            <BlogEntry />
-
-            <AboutBox 
-            about = {user.about}
-            answer = {user.answer}
-          />
-          </section>
-          </div>
-        ))}
-
-      </main>
+      <div className="container">
+        <section className="section-right">
+          <h2>Browse Users</h2>
+          <ul>
+            {users.map((user) => (
+              <li key={user.username}>
+                <Link href={`/users/${user.username}`}>
+                  {user.name}
+                </Link>
+                {" — "}
+                {user.status}
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+    </main>
   );
 }
