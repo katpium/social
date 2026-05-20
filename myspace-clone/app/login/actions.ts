@@ -2,8 +2,9 @@
 
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
+import { redirect } from "next/navigation";
 
-export async function loginAction(formData: FormData) {
+export async function loginAction(formData: FormData): Promise<void> {
     const username = formData.get("username") as string;
     const password = formData.get("password") as string;
 
@@ -15,7 +16,7 @@ export async function loginAction(formData: FormData) {
         });
     } catch (error) {
         if (error instanceof AuthError) {
-            return { error: "Invalid username or password." };
+            redirect("/login?error=invalid");
         }
         throw error;
     }

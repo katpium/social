@@ -707,6 +707,7 @@ a:visited {
 /* ===== Friends (Friend Space) ===== */
 .friends-box {
     border: 2px ridge #f0b270;
+    background-color: white;
     margin-bottom: 12px;
 }
 

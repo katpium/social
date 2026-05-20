@@ -32,5 +32,77 @@
     "body": "hello",
     "read": false,
     "createdAt": "2026-05-20T08:38:00.996Z"
+  },
+  {
+    "id": "m-mpdvumgm-wiemyv",
+    "type": "message",
+    "from": "levi",
+    "to": "john",
+    "body": "hi johnn",
+    "read": false,
+    "createdAt": "2026-05-20T09:52:05.686Z"
+  },
+  {
+    "id": "m-mpdvuvpj-m81fow",
+    "type": "message",
+    "from": "levi",
+    "to": "john",
+    "body": "hhuu",
+    "read": false,
+    "createdAt": "2026-05-20T09:52:17.671Z"
+  },
+  {
+    "id": "m-mpdvwk0m-3yghba",
+    "type": "message",
+    "from": "levi",
+    "to": "ben",
+    "body": "hi beenn",
+    "read": false,
+    "createdAt": "2026-05-20T09:53:35.830Z"
+  },
+  {
+    "id": "m-mpdvx9yy-n3yz59",
+    "type": "message",
+    "from": "ben",
+    "to": "levi",
+    "body": "hiii",
+    "read": false,
+    "createdAt": "2026-05-20T09:54:09.466Z"
+  },
+  {
+    "id": "m-mpdvxf56-ku311x",
+    "type": "message",
+    "from": "ben",
+    "to": "levi",
+    "body": "Hi Levi",
+    "read": false,
+    "createdAt": "2026-05-20T09:54:16.170Z"
+  },
+  {
+    "id": "m-mpdvxnz1-rkhmc9",
+    "type": "message",
+    "from": "ben",
+    "to": "levi",
+    "body": "It is I, Benjamin Doverius",
+    "read": false,
+    "createdAt": "2026-05-20T09:54:27.613Z"
+  },
+  {
+    "id": "m-mpdvz5ks-yzngee",
+    "type": "message",
+    "from": "levi",
+    "to": "ben",
+    "body": "LOLLL",
+    "read": false,
+    "createdAt": "2026-05-20T09:55:37.084Z"
+  },
+  {
+    "id": "m-mpdvz9rr-388z5o",
+    "type": "message",
+    "from": "levi",
+    "to": "ben",
+    "body": "omg baby it works",
+    "read": false,
+    "createdAt": "2026-05-20T09:55:42.519Z"
   }
 ]

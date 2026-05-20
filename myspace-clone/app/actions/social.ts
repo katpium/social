@@ -4,8 +4,6 @@ import { auth } from "@/auth";
 import { getUsers, writeUsers, type User } from "@/app/data/users";
 import { revalidatePath } from "next/cache";
 
-type Result = { ok: boolean; error?: string };
-
 async function getSessionUsername(): Promise<string | null> {
     const session = await auth();
     return (session?.user as { username?: string } | undefined)?.username ?? null;
@@ -19,66 +17,72 @@ function toggleInArray(arr: string[] | undefined, value: string): string[] {
     return next;
 }
 
-export async function toggleFriend(targetUsername: string): Promise<Result> {
-    const me = await getSessionUsername();
-    if (!me) return { ok: false, error: "Not logged in." };
-    if (me === targetUsername) return { ok: false, error: "Can't friend yourself." };
+export async function toggleFriend(targetUsername: string): Promise<void> {
+    try {
+        const me = await getSessionUsername();
+        if (!me || me === targetUsername) return;
 
-    const users = getUsers();
-    const meUser = users.find((u) => u.username === me);
-    const otherUser = users.find((u) => u.username === targetUsername);
-    if (!meUser || !otherUser) return { ok: false, error: "User not found." };
+        const users = getUsers();
+        const meUser = users.find((u) => u.username === me);
+        const otherUser = users.find((u) => u.username === targetUsername);
+        if (!meUser || !otherUser) return;
 
-    const wasFriend = meUser.friends.includes(targetUsername);
-    meUser.friends = toggleInArray(meUser.friends, targetUsername);
-    if (wasFriend) {
-        otherUser.friends = otherUser.friends.filter((u) => u !== me);
-    } else if (!otherUser.friends.includes(me)) {
-        otherUser.friends = [...otherUser.friends, me];
+        const wasFriend = meUser.friends.includes(targetUsername);
+        meUser.friends = toggleInArray(meUser.friends, targetUsername);
+        if (wasFriend) {
+            otherUser.friends = otherUser.friends.filter((u) => u !== me);
+        } else if (!otherUser.friends.includes(me)) {
+            otherUser.friends = [...otherUser.friends, me];
+        }
+
+        writeUsers(users);
+        revalidatePath(`/users/${targetUsername}`);
+        revalidatePath(`/users/${me}`);
+    } catch (err) {
+        console.error("toggleFriend threw:", err);
     }
-
-    writeUsers(users);
-    revalidatePath(`/users/${targetUsername}`);
-    revalidatePath(`/users/${me}`);
-    return { ok: true };
 }
 
-export async function toggleFavorite(targetUsername: string): Promise<Result> {
-    const me = await getSessionUsername();
-    if (!me) return { ok: false, error: "Not logged in." };
-    if (me === targetUsername) return { ok: false, error: "Can't favorite yourself." };
+export async function toggleFavorite(targetUsername: string): Promise<void> {
+    try {
+        const me = await getSessionUsername();
+        if (!me || me === targetUsername) return;
 
-    const users = getUsers();
-    const meUser = users.find((u) => u.username === me);
-    if (!meUser) return { ok: false, error: "User not found." };
+        const users = getUsers();
+        const meUser = users.find((u) => u.username === me);
+        if (!meUser) return;
 
-    meUser.favorites = toggleInArray(meUser.favorites, targetUsername);
+        meUser.favorites = toggleInArray(meUser.favorites, targetUsername);
 
-    writeUsers(users);
-    revalidatePath(`/users/${targetUsername}`);
-    return { ok: true };
+        writeUsers(users);
+        revalidatePath(`/users/${targetUsername}`);
+    } catch (err) {
+        console.error("toggleFavorite threw:", err);
+    }
 }
 
-export async function toggleBlock(targetUsername: string): Promise<Result> {
-    const me = await getSessionUsername();
-    if (!me) return { ok: false, error: "Not logged in." };
-    if (me === targetUsername) return { ok: false, error: "Can't block yourself." };
+export async function toggleBlock(targetUsername: string): Promise<void> {
+    try {
+        const me = await getSessionUsername();
+        if (!me || me === targetUsername) return;
 
-    const users = getUsers();
-    const meUser = users.find((u) => u.username === me);
-    if (!meUser) return { ok: false, error: "User not found." };
+        const users = getUsers();
+        const meUser = users.find((u) => u.username === me);
+        if (!meUser) return;
 
-    const wasBlocked = meUser.blocked?.includes(targetUsername) ?? false;
-    meUser.blocked = toggleInArray(meUser.blocked, targetUsername);
+        const wasBlocked = meUser.blocked?.includes(targetUsername) ?? false;
+        meUser.blocked = toggleInArray(meUser.blocked, targetUsername);
 
-    if (!wasBlocked) {
-        meUser.friends = meUser.friends.filter((u) => u !== targetUsername);
-        const other = users.find((u: User) => u.username === targetUsername);
-        if (other) other.friends = other.friends.filter((u) => u !== me);
+        if (!wasBlocked) {
+            meUser.friends = meUser.friends.filter((u) => u !== targetUsername);
+            const other = users.find((u: User) => u.username === targetUsername);
+            if (other) other.friends = other.friends.filter((u) => u !== me);
+        }
+
+        writeUsers(users);
+        revalidatePath(`/users/${targetUsername}`);
+        revalidatePath(`/users/${me}`);
+    } catch (err) {
+        console.error("toggleBlock threw:", err);
     }
-
-    writeUsers(users);
-    revalidatePath(`/users/${targetUsername}`);
-    revalidatePath(`/users/${me}`);
-    return { ok: true };
 }

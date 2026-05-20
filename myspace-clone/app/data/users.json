@@ -119,10 +119,10 @@
     ],
     "photoUrl": "/uploads/levi-1779266736707.jpg",
     "theme": {
-      "bgColor": "#190000",
+      "bgColor": "#000000",
       "accentColor": "#615151",
       "bgPattern": "checker",
-      "cardColor": "#f5f5f5",
+      "cardColor": "#e5d7d7",
       "textColor": "#c20000",
       "accentShadeColor": "#121212",
       "accentTextColor": "#d23737"
@@ -157,7 +157,8 @@
     "music": {
       "url": "/uploads/levi-music-1779260740058.mp3",
       "title": "Green Day - Brain StewJaded [Official Music Video]"
-    }
+    },
+    "favorites": []
   },
   {
     "username": "ben",
@@ -167,7 +168,7 @@
     "bio": "41 year old, cattle rancher in Amarillo, Texas.",
     "mood": "excited",
     "about": "Howdy partner!",
-    "answer": "Sofia Veragara",
+    "answer": "Sofia Vergara",
     "interests": {
       "general": "BBQ, country music, rodeos, my truck",
       "music": "George Strait, Willie Nelson, Dolly Parton",

@@ -3,11 +3,13 @@ import { auth, signOut } from "@/auth";
 
 export default async function Header() {
     const session = await auth();
+    const me = (session?.user as { username?: string } | undefined)?.username ?? null;
+    const homeHref = me ? `/users/${me}` : "/";
 
     return (
         <>
         <header className="header">
-            <Link href="/" className="logo">
+            <Link href={homeHref} className="logo">
                 <span className="logo-icon">hey</span>
                 <span className="logo-text">
                     <strong>spacehey</strong>

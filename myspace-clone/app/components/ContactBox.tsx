@@ -97,7 +97,7 @@ export default async function ContactBox({ viewedUsername, viewedName }: Props) 
 
 type ActionItemProps = {
     enabled: boolean;
-    action: () => Promise<unknown>;
+    action: () => Promise<void>;
     icon: string;
     label: string;
     active: boolean;
